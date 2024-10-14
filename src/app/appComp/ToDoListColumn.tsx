@@ -1,19 +1,21 @@
 import React from 'react';
 import ToDoListItem from './ToDoListItem';
 
-interface ToDoListColumnProps {
-  title: string;
+type ToDoListColumnProps = {
+    title: string;
+    //tag: 'Planning' | 'Working' | 'Done';
+    notes: Array<{ id: string; title: string; description: string; tag: string }>;
 }
 
-const ToDoListColumn: React.FC<ToDoListColumnProps> = ({ title }) => {
-  return (
-    <div className="column">
-      <h1 className="font-bold mb-4 text-center text-3xl">{title}</h1>
-      {/* Render your ToDoListItems here */}
-      <ToDoListItem cardTitle="Example Task 1" cardContent="Description for task 1" />
-      <ToDoListItem cardTitle="Example Task 2" cardContent="Description for task 2" />
-    </div>
-  );
+const ToDoListColumn: React.FC<ToDoListColumnProps> = ({title, notes}) => {
+    return (
+        <div className="column">
+            <h1 className="font-bold mb-4 text-center text-3xl">{title}</h1>
+            {notes.map((note) => (
+                <ToDoListItem key={note.id} noteId={note.id}/>
+            ))}
+        </div>
+    );
 };
 
 export default ToDoListColumn;
