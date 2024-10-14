@@ -8,7 +8,7 @@ interface ToDoListColumnProps {
 const ToDoListColumn: React.FC<ToDoListColumnProps> = ({ title }) => {
   return (
     <div className="column">
-      <h1 className="font-bold mb-4 text-center">{title}</h1>
+      <h1 className="font-bold mb-4 text-center text-3xl">{title}</h1>
       {/* Render your ToDoListItems here */}
       <ToDoListItem cardTitle="Example Task 1" cardContent="Description for task 1" />
       <ToDoListItem cardTitle="Example Task 2" cardContent="Description for task 2" />
