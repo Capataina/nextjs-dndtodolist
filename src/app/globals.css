@@ -98,7 +98,7 @@ body {
 }
 
 .card:hover {
-  @apply transform hover:translate-y-[-5px]; /* Slight hover effect */
+  @apply transform hover:translate-y-[-5px] hover:rotate-1; /* Slight hover effect */
 }
 
 /* Card content */
