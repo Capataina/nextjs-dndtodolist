@@ -1,17 +1,44 @@
+"use client";
+
 import React from 'react';
+import { useState } from 'react';
+import useNoteStore from './NoteStore';
 import ToDoListItem from './ToDoListItem';
 
-interface ToDoListColumnProps {
+type ToDoListColumnProps = {
   title: string;
+  tag: 'Planning' | 'Working' | 'Done';
+  notes: Array<{ id: string; title: string; description: string; tag: string }>;
 }
 
-const ToDoListColumn: React.FC<ToDoListColumnProps> = ({ title }) => {
+const ToDoListColumn: React.FC<ToDoListColumnProps> = ({ title, tag, notes }) => {
+  const addNote = useNoteStore((state) => state.addNote);
+  const [showAddButton, setShowAddButton] = useState(false);
+
   return (
-    <div className="column">
-      <h1 className="font-bold mb-4 text-center text-3xl">{title}</h1>
-      {/* Render your ToDoListItems here */}
-      <ToDoListItem cardTitle="Example Task 1" cardContent="Description for task 1" />
-      <ToDoListItem cardTitle="Example Task 2" cardContent="Description for task 2" />
+    <div
+      className="column"
+      onMouseEnter={() => setShowAddButton(true)}
+      onMouseLeave={() => setShowAddButton(false)}
+    >
+      <div className="header">
+        <h2>{title}</h2>
+        {showAddButton && (
+          <button
+            onClick={() =>
+              addNote('New Note', 'Description here...', tag)
+            }
+            className="ml-2"
+          >
+            +
+          </button>
+        )}
+      </div>
+      <div className="notes-container">
+        {notes.map((note) => (
+          <ToDoListItem key={note.id} noteId={note.id} />
+        ))}
+      </div>
     </div>
   );
 };
